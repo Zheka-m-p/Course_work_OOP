@@ -74,7 +74,7 @@ if __name__ == '__main__':
         json.dump(result, res_file, ensure_ascii=False, indent=4)
 
     with open('HH_res.json', encoding='utf-8') as res_file:  # это чтобы красиво выводить из списка
-        # но так же ещё нужно проверить про зп. её может не быть или же вилка зарплат может быть
+        # но так же ещё нужно проверить про зп. её может не быть или же вилка зарплат может быть или как сделать?!
         res_data = json.load(res_file)
         for item in res_data:
             print(f"{item.get('name')}, {item.get('salary', 'не указана')}, {item['area'].get('name')}")

@@ -18,10 +18,12 @@ if __name__ == '__main__':
         L = ListHHVacancies()  # создаем экземпляр класса, где будем хранить наши вакансии с HH, имя файла можем указать
         hh_engine = HH()
         result = hh_engine.get_request(search_word, count_vacancies)
+        file_name = 'HH.txt'
     else:
         L = ListSJVacancies()
         sj_engine = SuperJob()
         result = sj_engine.get_request(search_word, count_vacancies)
+        file_name = 'SJ.txt'
 
     L.write_in_file(result)  # записываем в наш файл результаты запроса
     L.fill_vacancy_list()  # заполняем список вакансиями с HH
@@ -42,4 +44,4 @@ if __name__ == '__main__':
     print('СПИСОК ВАКАНСИЙ ГДЕ НЕ НУЖЕН ОПЫТ: ')
     print()
     print(*get_vacancy_without_exp(L.data), sep='\n')  # список вакасний где не нужен опыт, не легко было найти на HH
-    L.print_in_file('HH.txt')  # запись всех данных в файл txt
+    L.print_in_file(file_name)  # запись всех данных в файл txt
