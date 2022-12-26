@@ -2,6 +2,8 @@
 import json
 import requests
 from abc import abstractmethod
+
+
 # from connector import Connector
 # from engine_classes import SuperJob, HH
 
@@ -75,6 +77,7 @@ class SJVacancy(Vacancy):  # add counter mixin
 
 class ListVacancies:
     """Базовый класс для списка куда будем складывать вакансии (объекты других классов)"""
+
     def __init__(self, file_name='Pusto.json'):
         self.file_name = file_name
         self.value = -1
@@ -123,8 +126,10 @@ class ListVacancies:
             Так же определяет для каждого экемпляра его атрибуты"""
         raise NotImplementedError('А ну давай переопределяй метод!')
 
+
 class ListHHVacancies(ListVacancies):
     """ Класс для содержания объектов HHvacancy """
+
     def __init__(self, file_name='HH_res.json'):
         self.file_name = file_name
         self.value = -1
@@ -140,14 +145,19 @@ class ListHHVacancies(ListVacancies):
                 # и смех и грех)))при переходе на ссылку автоматом делает отклик)))
                 link_vacancy = work.get('alternate_url')
                 salary_value = 0
+                check_value = 0  # временная переменная, чтобы правильно посчитать итоговую зп для сравнения
                 if work.get('salary'):
                     salary_vacancy = ''
                     if str(work['salary'].get('from')).isdigit():
                         salary_vacancy += f"от {work['salary'].get('from')}"
                         salary_value = work['salary'].get('from')
+                        check_value = 1
                     if str(work['salary'].get('to')).isdigit():
                         salary_vacancy += f" до {work['salary'].get('to')}"
-                        salary_value = (salary_value + work['salary'].get('to')) / 2
+                        if check_value:
+                            salary_value = (salary_value + work['salary'].get('to')) / 2
+                        else:
+                            salary_value = salary_value + work['salary'].get('to')
                     salary_vacancy += f" {work['salary'].get('currency')}"
                     if work['salary'].get('gross'):
                         salary_vacancy += f" до вычета налогов"

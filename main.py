@@ -5,7 +5,7 @@ from jobs_classes import sorting, get_top, ListHHVacancies, ListSJVacancies, Vac
 
 if __name__ == '__main__':
     print('Работает файл main')
-    print(f"Введите номер сайта на котором будем искать: {HH.base_URL} {SuperJob.base_url} 1 или 2 соответственно: ")
+    print(f"Введите номер сайта на котором будем искать: {HH.base_URL} или {SuperJob.base_url} 1 или 2 соответственно: ")
     website_number = int(input())
     # website_number = 1
     print(f"Введите ключевое слово, по которому будем искать")
